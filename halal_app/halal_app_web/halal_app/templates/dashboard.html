@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main class="container">
+    <!-- Dashboard Header Section -->
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <div class="jumbotron text-center">
+            <p class="h2 mb-4">Hello admin, welcome to your dashboard!</p>
+            <div class="d-flex justify-content-center">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="m-3" width="20%" height="20%">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center custom-card">
+                <div class="card-box">
+                    <h5 class="card-title">Awareness</h5>
+                    <p class="count-number">{{ announcement_count }}</p>
+                    <p class="card-text">View and make awareness.</p>
+                    <a href="/announcement" class="btn btn-custom">View Awareness</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center custom-card">
+                <div class="card-box">
+                    <h5 class="card-title">Shop Announcement</h5>
+                    <p class="count-number">{{ post_count }}</p>
+                    <p class="card-text">View and manage shop announcement.</p>
+                    <a href="/posts" class="btn btn-custom">View Shop Announcement</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center custom-card">
+                <div class="card-box">
+                    <h5 class="card-title">Shop List</h5>
+                    <p class="count-number">{{ shop_count }}</p>
+                    <p class="card-text">View the list of shops.</p>
+                    <a href="/shops" class="btn btn-custom">View Shop List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center custom-card">
+                <div class="card-box">
+                    <h5 class="card-title">Muslim-Friendly Certified</h5>
+                    <p class="count-number">{{ mf_certified_count }}</p>
+                    <p class="card-text">View the list of Muslim-Friendly Certified Shops.</p>
+                    <a href="/register_list" class="btn btn-custom">View MF Certified List</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center custom-card">
+                <div class="card-box">
+                    <h5 class="card-title">Users</h5>
+                    <p class="count-number">{{ user_count }}</p>
+                    <p class="card-text">Manage user accounts and permissions.</p>
+                    <a href="/users" class="btn btn-custom">Go to Users</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center custom-card">
+                <div class="card-box">
+                    <h5 class="card-title">Expiring Shops</h5>
+                    <p class="count-number">{{ expiring_shops_count }}</p>
+                    <p class="card-text">View shops expiring within 2 months.</p>
+                    <a href="/expiring_shops" class="btn btn-custom">View Expiring Shops</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <!-- Bootstrap core CSS -->
+    
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/docs.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dselect.css')}}">
+    <link href="{{ url_for('static', filename='css/dataTables.bootstrap5.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/searchBuilder.bootstrap5.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/dataTables.dateTime.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/buttons.bootstrap5.min.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='logo.gif') }}">
+    <script src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/fontawesome-icon/css/all.min.css') }}"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css"/>
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='mains.css')}}" rel="stylesheet">
+
+  <style>        
+    .processed-video {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.processed-video img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.section-title {
+            color: #007bff;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .feature-list li {
+            list-style-type: none;
+            margin-bottom: 10px;
+        }
+        .team-members {
+            font-style: italic;
+            color: #6c757d;
+        }
+        .contact-info a {
+            color: #007bff;
+        }
+        .highlight-bg {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        
+</style>
+
+<style>
+    /* Adjusting the count number size */
+    .count-number {
+        font-size: 1.25rem;  /* Reduced font size */
+        font-weight: bold;
+        color: #333;
+    }
+
+    .navbar-nav .nav-item {
+      margin-right: 25px; /* Adjust this value as needed */
+    }
+
+    .navbar-nav .nav-link {
+      padding-left: 20px; 
+      padding-right: 20px; 
+    }
+
+    /* Adjusting the card body size (height and width) */
+    .card-box {
+        border-radius: 12px;
+        background-color: rgb(252, 179, 22, 255);
+        padding: 1rem;  /* Adjust padding to fit the new width */
+        height: 200px;  /* Set a fixed height for the card body */
+        width: 100%;  /* Ensure the card body takes the full width of the column */
+        transition: all 0.3s ease-in-out;
+        text-align: center;  /* Ensure content is centered */
+    }
+
+    /* Adjust hover effect for the card */
+    .custom-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgb(251, 243, 243);
+    }
+
+    /* Custom button styles */
+    .btn-custom {
+        background-color: rgb(22, 22, 63, 255);
+        color: #FFFFFF;
+        border-radius: 50px;
+        font-weight: bold;
+        padding: 8px 16px;  /* Reduced padding */
+        text-transform: uppercase;
+        transition: background-color 0.3s ease-in-out;
+        font-size: 0.9rem;  /* Reduced font size */
+    }
+
+    .btn-custom:hover {
+        background-color: rgb(255, 255, 255);
+    }
+
+    /* Adjust the card dimensions */
+    .custom-card {
+        width: 100%;  /* Make the card body take full width */
+        margin: auto;  /* Center the card */
+    }
+
+    /* Adjust the layout for better spacing */
+    .row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    /* Optional: Adjust column width */
+    .col-md-4 {
+        flex: 1 1 30%;  /* Set the card width to 30% of the container, leaving space for responsiveness */
+        margin: 10px;  /* Add margin between cards */
+    }
+    
+</style>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body class="bg-body">
+    <script>
+      //not all negative number
+      var numberInputs = document.querySelectorAll('input[type="number"]');
+
+      numberInputs.forEach(function(input) {
+          input.addEventListener("input", function() {
+              if (this.value < 0) {
+                  this.value = 0;
+              }
+          });
+      });
+    </script>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="check-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
+      </symbol>
+      <symbol id="info-fill" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"></path>
+      </symbol>
+      <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+      </symbol>
+    </svg>   
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-orange" aria-label="Main navigation">
+  <div class="container-fluid">
+    <img class="me-3" src="{{ url_for('static', filename='logo.png')}}" alt="" width="80" height="50">
+    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/announcement">Awareness</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/posts">Shop Announcement</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/shops">Shop List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/register_list">MF Certified List</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/expiring_shops">Expiring Shop List</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users">Users</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav justify-content-end">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-user">
+              </i>
+              {{ session.fullname }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+    </div>
+  </div>
+</nav>
+<div class="nav-scroller bg-body shadow-sm">
+  {% block page %}{% endblock  %}
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      {% if category == 'success' %}
+        <div class="alert alert-success alert-dismissible fade show" id="success" role="alert">
+          <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endif %}
+      {% if category == 'error' %} 
+        <div class="alert alert-danger alert-dismissible fade show" id="danger" role="alert">
+          <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endif %}
+      {% if category == 'warning' %} 
+      <div class="alert alert-warning alert-dismissible fade show" id="danger" role="alert">
+        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+{% block content %}
+{% endblock  %}
+  <script src="{{ url_for('static', filename='dselect.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='offcanvas.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery-3.5.1.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/dataTables.bootstrap5.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/dataTables.searchBuilder.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/searchBuilder.bootstrap5.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/dataTables.dateTime.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/dataTables.buttons.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/buttons.bootstrap5.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jszip.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/pdfmake.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/vfs_fonts.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/buttons.html5.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/buttons.print.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/buttons.colVis.min.js')}}"></script>
+  <script src="https://cdn.datatables.net/select/1.4.0/js/dataTables.select.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main class="container">
+    <div class="d-flex align-items-center p-3 my-3 text-white bg-orange rounded shadow-sm">
+        <div class="lh-1">
+            <h1 class="h6 mb-0 text-white lh-1">Expiring Muslim Friendly Certified Establishments</h1>
+        </div>
+    </div>
+
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <div class="row row-cols-1 row-cols-md-2 ps-2 pe-2 gy-1">
+            <div class="col-md-12 themed-grid-col p-1">
+                <div class="p-2 bg-body rounded shadow-sm">
+                    <table id="serials" class="table m-0 table-hover table-bordered pt-2" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Certificate Number</th>
+                                <th>Shop Name</th>
+                                <th>Owner Name</th>
+                                <th>Address</th>
+                                <th>Phone Number</th>
+                                <th>Issued Date</th>
+                                <th>Expiry Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for shop in shops %}
+                            <tr>
+                                <td data-label="Halal Certificate Number">{{ shop[0] }}</td> <!-- Adjust based on your table structure -->
+                                <td data-label="Shop Name">{{ shop[1] }}</td> <!-- Adjust based on your table structure -->
+                                <td data-label="Owner Name">{{ shop[2] }}</td> <!-- Adjust based on your table structure -->
+                                <td data-label="Address">{{ shop[3] }}</td> <!-- Adjust based on your table structure -->
+                                <td data-label="Phone Number">{{ shop[4] }}</td> <!-- Adjust based on your table structure -->
+                                <td data-label="Issued Date">{{ shop[5] }}</td> <!-- Adjust based on your table structure -->
+                                <td data-label="Expiry Date">{{ shop[6] }}</td> <!-- Adjust based on your table structure -->
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

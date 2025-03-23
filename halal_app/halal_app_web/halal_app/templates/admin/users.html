@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main id="userLists" class="container">
+  <div class="d-flex align-items-center p-3 my-3 text-white bg-orange rounded shadow-sm">
+    <div class="lh-1">
+      <h1 class="h6 mb-0 text-white lh-1">Users</h1>
+    </div>
+  </div>
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <div class="row row-cols-1 row-cols-md-2 ps-2 pe-2 gy-1">
+        <div class="col-md-12 themed-grid-col p-1">
+            <div class="p-2 bg-body rounded shadow-sm">
+                <table id="serials" class="table table-sm m-0 table-hover table-bordered pt-2" width="100%">               
+                  <thead>
+                      <tr>
+                          <th></th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>User Type</th>
+                          <th>Status</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                    {% if userlist %}
+                        {% for user in userlist %}
+                        <tr> 
+                          <td data-label="Photo">
+                            <img src="{{ user['profile_picture'] if user['profile_picture'] else 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png' }}" 
+                                 alt="Profile Picture" 
+                                 style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+                          </td>
+                          <td data-label="Name">{{ user['fullName'] }}</td>
+                          <td data-label="Email">{{ user['email'] }}</td>
+                          <td data-label="User Type">{{ 'Shop' if user['type'] == 'Shop' else 'Seeker' }}</td>
+                          <td data-label="Status">
+                            <input type="checkbox" class="status-toggle" data-uid="{{ user['email'] }}" {% if user['status'] %}checked{% endif %}>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <p>No users found.</p>
+                    {% endif %}
+                  </tbody>
+              </table><!-- end table -->
+            </div>
+        </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Handle toggle switch change event
+  document.querySelectorAll('.status-toggle').forEach(toggle => {
+    toggle.addEventListener('change', (e) => {
+      const uid = e.target.getAttribute('data-uid');
+      const status = e.target.checked;
+
+      // Send the new status to the server for updating Firestore
+      fetch('/update_user_status', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          uid: uid,
+          status: status
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message === "User status updated successfully!") {
+          alert('Status updated successfully!');
+        } else {
+
+        }
+      })
+    });
+  });
+</script>
+
+{% endblock %}

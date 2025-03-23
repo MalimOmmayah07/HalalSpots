@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main class="container">
+    <div class="d-flex align-items-center p-3 my-3 text-white bg-orange rounded shadow-sm">
+        <div class="lh-1">
+            <h1 class="h6 mb-0 text-white lh-1">Shop Announcement</h1>
+        </div>
+    </div>
+
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <div class="row row-cols-1 row-cols-md-2 ps-2 pe-2 gy-1">
+            <div class="col-md-12 themed-grid-col p-1">
+                <div class="p-2 bg-body rounded shadow-sm">
+                    <table id="serials" class="table m-0 table-hover table-bordered pt-2" width="100%">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">Datetime</th>
+                                <th>Title</th>
+                                <th>Post</th>
+                                <th>Post by</th>
+                                <th style="width: 15%;">Image URL</th>
+                                <th style="width: 15%;">Link</th>
+                                <th style="width: 15%;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if posts %}
+                                {% for post in posts %}
+                                    <tr>
+                                        <td data-label="Datetime">{{ post['timestamp'] }}</td>
+                                        <td data-label="Title">{{ post['title'] }}</td>
+                                        <td data-label="Post">{{ post['details'] }}</td>
+                                        <td data-label="Post by">{{ post['postedBy'] }}</td>
+                                        <td data-label="Image URL">
+                                            {% if post['imageUrl'] %}
+                                                <img src="{{ post['imageUrl'] }}" alt="Image" style="max-width: 100px; max-height: 100px;">
+                                            {% else %}
+                                                No image available
+                                            {% endif %}
+                                        </td>
+                                        <td data-label="Link">
+                                            {% if post['link'] %}
+                                                <a href="{{ post['link'] }}" target="_blank">{{ post['link'] }}</a>
+                                            {% else %}
+                                                No link available
+                                            {% endif %}
+                                        </td>
+                                        <td data-label="Actions">
+                                            <!-- View Button -->
+                                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}">
+                                                View
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="imageModalLabel{{ loop.index }}">Post Details</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p><strong>Title:</strong> {{ post['title'] }}</p>
+                                                            <p><strong>Details:</strong> {{ post['details'] }}</p>
+                                                            <p><strong>Posted by:</strong> {{ post['postedBy'] }}</p>
+                                                            <p><strong>Datetime:</strong> {{ post['timestamp'] }}</p>
+                                                            {% if post['imageUrl'] %}
+                                                                <p><strong>Image:</strong></p>
+                                                                <img src="{{ post['imageUrl'] }}" alt="Image" style="max-width: 10%;">
+                                                            {% endif %}
+                                                            {% if post['link'] %}
+                                                                <p><strong>Link:</strong> <a href="{{ post['link'] }}" target="_blank">{{ post['link'] }}</a></p>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="7">No posts found.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

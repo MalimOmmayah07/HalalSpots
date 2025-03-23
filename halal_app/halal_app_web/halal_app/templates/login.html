@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HalalSpots</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'main.css') }}">
+  <style>
+    .flashes {
+      list-style: none;
+      padding: 0;
+    }
+    .flashes li {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .flashes .danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .fade {
+      opacity: 0;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+        var flashes = document.querySelectorAll('.flashes li');
+        flashes.forEach(function(flash) {
+          flash.style.opacity = '0';
+        });
+        setTimeout(function() {
+          flashes.forEach(function(flash) {
+            flash.remove();
+          });
+        }, 500);
+      }, 5000);
+    });
+  </script>
+</head>
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Sign In </h2>
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="{{ url_for('static', filename = 'logo.png') }}" id="icon" alt="Logo" />
+    </div>
+
+    <!-- Login Form -->
+    <form action="/result" method="POST">
+      <input type="email" id="login" class="fadeIn second" name="email" placeholder="Email">
+      <input type="password" id="password" class="fadeIn third" name="pass" placeholder="Password">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+  </div>
+</div>
+</body>
+</html>

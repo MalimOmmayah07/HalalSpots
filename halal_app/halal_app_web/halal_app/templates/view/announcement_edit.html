@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main class="container">
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h2>Edit Awareness</h2>
+        <form method="POST" action="">
+            <div class="mb-3">
+                <label for="datetime" class="form-label">Datetime</label>
+                <input type="datetime-local" id="datetime" name="datetime" class="form-control" value="{{ post['datetime']|replace(' ', 'T') }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Post Content</label>
+                <textarea id="content" name="content" class="form-control" rows="3" required>{{ post['content'] }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Awareness</button>
+            <a href="{{ url_for('announcement') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</main>
+{% endblock %}

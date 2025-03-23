@@ -1,0 +1,195 @@
+
+body {
+  padding-top: 56px;
+}
+
+.containers {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.navbar-nav{
+  font-size: large;
+  font-weight: 700;
+}
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-top: .25rem;
+  padding-bottom: 1rem;
+  overflow-x: auto;
+  color: rgba(255, 255, 255, .75);
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-underline .nav-link {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: .875rem;
+  color: #6c757d;
+}
+
+.nav-underline .nav-link:hover {
+  color: #007bff;
+}
+
+.nav-underline .active {
+  font-weight: 500;
+  color: #343a40;
+}
+
+.themed-grid-col {
+  padding: .30rem;
+  background-color: rgba(86, 61, 124, .15);
+  border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.text-white-50 { color: rgba(255, 255, 255, .5); }
+
+.bg-orange { background-color: #0c2b5aed; }
+
+.btn { 
+  padding: .5rem;
+  font-size:15px;
+  font-weight: 700;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+}
+
+.form-select{ 
+  --bs-btn-padding-y: .2rem; 
+  --bs-btn-padding-x: .2rem;
+}
+
+table, .table tr, .table td, .table th{
+  width: 60%;
+  font-size:13px;
+  vertical-align: middle;
+  width: auto;
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.dt-button.green {
+  color: green;
+}
+
+  /* Styling for the toggle switch */
+  .status-toggle {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 60px;
+    height: 34px;
+    border-radius: 34px;
+    background-color: #ccc;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .status-toggle:checked {
+    background-color: #4CAF50; /* Green when checked */
+  }
+
+  .status-toggle:before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: white;
+    transition: transform 0.3s ease;
+  }
+
+  .status-toggle:checked:before {
+    transform: translateX(26px); /* Move the switch to the right when checked */
+  }
+
+
+
+
+
+
+@media screen and (max-width: 700px){
+  .offcanvas-collapse {
+    position: fixed;
+    top: 56px; /* Height of navbar */
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1re
+    m;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color:  #000000ed;
+    transition: transform .3s ease-in-out, visibility .3s ease-in-out;
+  }
+  .offcanvas-collapse.open {
+    visibility: visible;
+    transform: translateX(-100%);
+  }
+
+
+  .bg-body {
+    width: 100%;
+  }
+
+  .default {
+    width: 30%;
+    height: 30%;
+  }
+
+  table thead{display: none;}
+  table tbody, table tbody tr{display: block; width: 100%;}
+  table tbody tr th::before, table tbody tr td::before{content: attr(data-label); font-weight: bold; display: block;}
+  table tbody tr td{display: block; width: 50%;}
+  table tbody tr th{display: block; width: 50%;}
+  table tbody tr{margin-bottom: 16px;}
+
+  table, .table tr, .table td, .table th{
+    width: 100%;
+    font-size:13px;
+    vertical-align: middle;
+    width: auto;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+
+  .btn-add {
+    width: 50%;
+  }
+}
+
+.white-text {
+  color: black;
+}
+
+.white-text {
+  color: white;
+}
+
+.red-text {
+  color: red;
+}
+
+.notification-count {
+  background-color: red; /* Choose your preferred background color */
+  color: white; /* Choose your preferred text color */
+  border-radius: 20%; /* Make it a circle */
+  padding: 1px 3px; /* Adjust padding as needed */
+  margin-left: 0.5px; /* Adjust margin as needed */
+  font-size: 1rem; /* Set font size to 1 */
+}

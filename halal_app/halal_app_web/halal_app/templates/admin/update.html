@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block page %}
+<nav class="nav nav-underline" aria-label="Secondary navigation">
+  <span class="nav-link disabled text-dark"><strong>User</strong></span>
+  <a class="nav-link" href="/users">
+    <strong>
+    List of Account
+    </strong>
+  </a>
+</nav>
+{% endblock %}
+
+{% block content %}
+<main class="container" style="max-width: 600px; margin: 0 auto;">
+  <div class="d-flex align-items-center p-3 my-3 text-white bg-orange rounded shadow-sm">
+    <div class="lh-1">
+      <h1 class="h6 mb-0 text-white lh-1">Update User</h1>
+    </div>
+  </div>
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+            <div class="bg-body rounded shadow-sm">
+              <form action="{{ url_for('update', id_user=id_user) }}" method="post" class="needs-validation" novalidate>
+                <div class="pb-1">
+                    <label for="fname" class="form-label">First name</label>
+                    <input type="text" class="form-control" value="{{ fname }}" id="fname" placeholder="Enter First Name" name="fname" required>
+                </div>
+                <div class="pb-1">
+                    <label for="lname" class="form-label">Last name</label>
+                    <input type="text" class="form-control" value="{{ lname }}" id="lname" placeholder="Enter Last Name" name="lname" required>
+                </div>
+                <div class="pb-1">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" value="{{ email }}" id="email" name="email" placeholder="Enter Email" disabled>
+                </div>
+                <div class="pb-1">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="1" id="is_admin1" name="is_admin" {% if is_admin %}checked{% endif %}>
+                        <label class="form-check-label" for="is_admin1">Administrator</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="0" id="is_admin0" name="is_admin" {% if not is_admin %}checked{% endif %}>
+                        <label class="form-check-label" for="is_admin0">User</label>
+                    </div>
+                </div>
+                <div class="pb-1">
+                    <input type="submit" class="btn btn-primary" style="width: 100%;" value="UPDATE">
+                </div>
+            </form>
+            
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,87 @@
+{
+  "project_info": {
+    "project_number": "388261259361",
+    "firebase_url": "https://halalspots-5d879-default-rtdb.firebaseio.com",
+    "project_id": "halalspots-5d879",
+    "storage_bucket": "halalspots-5d879.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388261259361:android:22bf7e702f7e657f0c6220",
+        "android_client_info": {
+          "package_name": "com.example.halal_spots"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8b-bKvAGTtT26TmBnQk6zL_D1Lrc8a0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388261259361:android:83bfe735f0b309bf0c6220",
+        "android_client_info": {
+          "package_name": "com.example.halalspots_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8b-bKvAGTtT26TmBnQk6zL_D1Lrc8a0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388261259361:android:b0eda343d69e1e9c0c6220",
+        "android_client_info": {
+          "package_name": "com.halalspots.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8b-bKvAGTtT26TmBnQk6zL_D1Lrc8a0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388261259361:android:61c412b370c8f75f0c6220",
+        "android_client_info": {
+          "package_name": "halal.spots"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8b-bKvAGTtT26TmBnQk6zL_D1Lrc8a0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

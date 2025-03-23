@@ -1,0 +1,228 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main class="container">
+    <div class="d-flex align-items-center p-3 my-3 text-white bg-orange rounded shadow-sm">
+        <div class="lh-1">
+            <h1 class="h6 mb-0 text-white lh-1">Shop List</h1>
+        </div>
+    </div>
+
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <div class="row row-cols-1 row-cols-md-2 ps-2 pe-2 gy-1">
+            <div class="col-md-12 themed-grid-col p-1">
+                <div class="p-2 bg-body rounded shadow-sm">
+                    <table id="serials" class="table m-0 table-hover table-bordered pt-2" width="100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Shop Name</th>
+                                <th>Store Address</th>
+                                <th>Muslim Friendly Certificate Number</th>
+                                <th>Business Permit</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if shops %}
+                                {% for shop in shops %}
+                                    <tr>
+                                        <!-- Shop Logo -->
+                                        <td data-label="Photo">
+                                            <img src="{{ shop['shop_logo'] if shop['shop_logo'] else 'https://e7.pngegg.com/pngimages/288/368/png-clipart-red-and-white-shop-illustration-text-brand-illustration-shop-text-retail-thumbnail.png' }}" 
+                                                 alt="Shop Logo" 
+                                                 style="width: 100px; height: 100px;" />
+                                        </td>
+
+                                        <!-- Shop Name -->
+                                        <td data-label="Shop Name">{{ shop['store_name'] if shop['store_name'] else 'N/A' }}</td>
+
+                                        <!-- Store Address -->
+                                        <td data-label="Shop Address">{{ shop['store_address'] if shop['store_address'] else 'N/A' }}</td>
+
+                                        <td data-label="Certificate Number">
+                                            <div class="image-container">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <img src="{{ shop['halal_certificate'] if shop['halal_certificate'] else 'https://via.placeholder.com/50' }}" style="width: 100px; height: 100px;" alt="Halal Certificate Image" class="img-fluid" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span class="image-text">{{ shop['halal_certificate_number'] if shop['halal_certificate_number'] else 'N/A' }}</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>
+                                        
+                                        <td data-label="Valid">
+                                            <div class="image-container">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <img src="{{ shop['valid_id'] if shop['valid_id'] else 'https://via.placeholder.com/50' }}" style="width: 100px; height: 100px;" alt="Valid ID Image" class="img-fluid" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span class="image-text">{{ shop['valid_id_verified'] if shop['valid_id_verified'] else 'N/A' }}</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>
+                                        
+                                    
+                                    
+                                        <!-- Actions -->
+                                        <td data-label="Actions">
+                                            <!-- View Button -->
+                                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}">
+                                                View Details
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" aria-labelledby="imageModalLabel{{ loop.index }}" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-primary text-white">
+                                                            <h5 class="modal-title" id="imageModalLabel{{ loop.index }}">Shop Details</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body p-4"> <!-- Reduced padding here -->
+                                                            <!-- Shop Details Section -->
+                                                            <div class="row g-3">
+                                                                <div>
+                                                                    <div class="card shadow-sm border-0 p-3">
+                                                                        <div class="card-body">
+                                                                            <img src="{{ shop['shop_logo'] if shop['shop_logo'] else 'https://e7.pngegg.com/pngimages/288/368/png-clipart-red-and-white-shop-illustration-text-brand-illustration-shop-text-retail-thumbnail.png' }}" 
+                                                                         alt="Shop Logo" class="img-fluid shadow-sm mb-3" style="max-width: 300px; max-height: 300px;" />
+                                                                            <h6 class="card-title text-primary">Shop Information</h6>
+                                                                            <ul class="list-unstyled">
+                                                                                <li><strong>Shop Name:</strong> {{ shop['store_name'] if shop['store_name'] else 'N/A' }}</li>
+                                                                                <li><strong>Store Owner:</strong> {{ shop['fullName'] if shop['fullName'] else 'N/A' }}</li>
+                                                                                <li><strong>Store Address:</strong> {{ shop['store_address'] if shop['store_address'] else 'N/A' }}</li>
+                                                                                <li><strong>Muslim Friendly Certificate Number:</strong> {{ shop['halal_certificate_number'] if shop['halal_certificate_number'] else 'N/A' }}</li>
+                                                                                <li><strong>Business Permit Verified:</strong> {{ shop['valid_id_verified'] if shop['valid_id_verified'] else 'N/A' }}</li>
+                                                                                {% if shop['average_rating'] != 'N/A' %}
+                                                                                            <li>{{ shop['average_rating'] }} / 5
+                                                                                                    {% for i in range(1, 6) %}
+                                                                                                        {% if i <= shop['average_rating'] %}
+                                                                                                            <i class="fas fa-star text-warning"></i>  <!-- Full star -->
+                                                                                                        {% else %}
+                                                                                                            <i class="far fa-star text-warning"></i>  <!-- Empty star -->
+                                                                                                        {% endif %}
+                                                                                                    {% endfor %}
+                                                                                            </li>
+                                                                                            {% else %}
+                                                                                                <li>No ratings yet.</li>
+                                                                                            {% endif %}
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Tabs for Items and Reviews -->
+                                                            <ul class="nav nav-tabs" id="shopTabs{{ loop.index }}" role="tablist">
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link active" id="items-tab{{ loop.index }}" data-bs-toggle="tab" href="#items{{ loop.index }}" role="tab" aria-controls="items{{ loop.index }}" aria-selected="true">Items</a>
+                                                                </li>
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link" id="reviews-tab{{ loop.index }}" data-bs-toggle="tab" href="#reviews{{ loop.index }}" role="tab" aria-controls="reviews{{ loop.index }}" aria-selected="false">Reviews</a>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="tab-content" id="shopTabsContent{{ loop.index }}">
+                                                                <!-- Items Tab -->
+                                                                <div class="tab-pane fade show active" id="items{{ loop.index }}" role="tabpanel" aria-labelledby="items-tab{{ loop.index }}">
+                                                                    {% if shop['items'] %}
+                                                                        <h6 class="text-primary mt-4">Item Details</h6>
+                                                                        {% for item in shop['items'] %}
+                                                                            <div class="card shadow-sm border-0 mb-3 position-relative">
+                                                                               
+                                                                                
+                                                                
+                                                                                <div class="card-body">
+                                                                                    <div class="row">
+                                                                                        <!-- Item Image -->
+                                                                                        <div class="col-md-4 text-center">
+                                                                                            <img src="{{ item['imageUrl'] if item['imageUrl'] else 'https://via.placeholder.com/200' }}" 
+                                                                                                alt="Item Image" class="img-fluid rounded shadow-sm mb-3" style="max-width: 100px; max-height: 100px;" />
+                                                                                        </div>
+                                                                                    
+                                                                                        <!-- Item Info -->
+                                                                                        <div class="col-md-8">
+                                                                                            <p class="m-0"><strong>Category:</strong> {{ item['category'] if item['category'] else 'N/A' }}</p>
+                                                                                            <p class="m-0"><strong>Item Name:</strong> {{ item['itemName'] if item['itemName'] else 'N/A' }}</p>
+                                                                                            <p class="m-0"><strong>Description:</strong> {{ item['description'] if item['description'] else 'N/A' }}</p>
+                                                                                            <p class="m-0"><strong>Price:</strong> ₱{{ item['price'] if item['price'] else 'N/A' }}</p>
+                                                                                            <p class="m-0"><strong>Availability:</strong> {{ 'Available' if item['isAvailable'] else 'Not Available' }}</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endfor %}
+                                                                    {% else %}
+                                                                        <p>No items available for this shop.</p>
+                                                                    {% endif %}
+                                                                </div>
+                                                                
+
+                                                                <!-- Reviews Tab -->
+                                                                <div class="tab-pane fade" id="reviews{{ loop.index }}" role="tabpanel" aria-labelledby="reviews-tab{{ loop.index }}">
+                                                                    {% if shop['userReviews'] %}
+                                                                        <h6 class="text-primary mt-4">Shop Reviews</h6>
+                                                                        {% for review in shop['userReviews'] %}
+                                                                            <div class="card shadow-sm border-0 mb-3 position-relative">
+                                                                                <!-- Delete Button positioned at top right -->
+                                                                                <form method="POST" action="{{ url_for('delete_review', review_id=review['id'], shop_name=shop['store_name']) }}" class="position-absolute top-0 end-0 p-2">
+                                                                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                                                        <i class="fas fa-trash"></i>
+                                                                                    </button>
+                                                                                </form>
+                                                                                
+
+                                                                                <div class="card-body p-0">
+                                                                                    <p><strong>Rating:</strong>
+                                                                                        {% for i in range(1, 6) %}
+                                                                                            {% if i <= review['rating'] %}
+                                                                                                <i class="fas fa-star text-warning"></i>
+                                                                                            {% else %}
+                                                                                                <i class="far fa-star text-warning"></i>
+                                                                                            {% endif %}
+                                                                                        {% endfor %}
+                                                                                    </p>
+                                                                                    <p><strong>Comment:</strong> {{ review['review'] }}</p>
+                                                                                    <p><strong>Reviewer:</strong> {{ review['userEmail'] }}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        {% endfor %}
+                                                                    {% else %}
+                                                                        <p>No reviews available for this shop.</p>
+                                                                    {% endif %}
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="7" class="text-center">No shops available.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
